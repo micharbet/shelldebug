@@ -1,0 +1,31 @@
+---
+- hosts: local
+  vars:
+    debugline: "echo STARTUP: $BASH_SOURCE"
+
+  tasks:
+    - name: debug line in system startup files
+      become: yes
+      become_user: root
+      lineinfile:
+        path: "{{item}}"
+        line: "{{debugline}}"
+        state: absent
+      loop:
+        - /etc/profile
+        - /etc/bashrc
+
+    - name: debug line in user profile
+      lineinfile:
+        path: "{{item}}"
+        line: "{{debugline}}"
+        state: absent
+      loop:
+        - ~/.profile
+        - ~/.bashrc
+        - ~/.bash_profile
+        - ~/.bash_logout
+        - ~/.bash_prompt        # crazy hypriotos prompt settings
+        - ~/.zshrc
+        - ~/.nosuchfile
+

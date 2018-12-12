@@ -1,0 +1,10 @@
+[remote]
+six1.usersys.redhat.com
+
+[local]
+localhost
+
+[local:vars]
+ansible_connection=local
+
+
