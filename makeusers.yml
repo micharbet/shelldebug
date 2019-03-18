@@ -1,0 +1,49 @@
+#
+# shelldebug.yml
+# --------------
+# add/remove debugging message into shell startup scripts
+# one can immediately see what files are executed during startup
+# Note: this breaks `scp`! (any output breaks scp)
+#
+# usage:
+#  ansible-palybook shelldebug.yml -e debug=<present|absent>
+#
+# author:  Michael Arbet (marbet@redhat.com)
+# license: GNU GPL v3
+# Copyright (C) 2019 by Michael Arbet
+#
+
+---
+- hosts: local
+  become: yes
+  become_user: root
+
+  tasks:
+    - name: regular user with bash
+      user:
+        name: borg
+        comment: "Bashed Being"
+        shell: /bin/bash
+        skeleton: /etc/skel
+
+    - name: regular user with zsh
+      user:
+        name: zac
+        comment: "The Zsh Hero"
+        shell: /bin/zsh
+        skeleton: /etc/skel
+
+    - name: homeless user with bash
+      user:
+        name: hobo
+        comment: "Proudly Homeless"
+        shell: /bin/bash
+        create_home: false
+
+    - name: disabled user
+      user:
+        name: neeve
+        comment: "Never Log In"
+        shell: /bin/nologin
+        skeleton: /etc/skel
+
