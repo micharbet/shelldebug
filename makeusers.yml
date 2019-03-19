@@ -1,12 +1,10 @@
 #
-# shelldebug.yml
-# --------------
-# add/remove debugging message into shell startup scripts
-# one can immediately see what files are executed during startup
-# Note: this breaks `scp`! (any output breaks scp)
+# makeusers.yml
+# -------------
+# Create testing users borg, zac, hobo and neeve
 #
 # usage:
-#  ansible-palybook shelldebug.yml -e debug=<present|absent>
+#  ansible-palybook makeusers.yml
 #
 # author:  Michael Arbet (marbet@redhat.com)
 # license: GNU GPL v3
@@ -14,9 +12,11 @@
 #
 
 ---
-- hosts: local
-  become: yes
-  become_user: root
+- hosts: remote
+#  become: yes
+#  become_user: root
+  vars:
+    ansible_user: root
 
   tasks:
     - name: regular user with bash

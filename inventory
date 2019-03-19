@@ -1,5 +1,8 @@
 [remote]
-six1.usersys.redhat.com
+tars.127001.cloud
+
+[remote:vars]
+ansible_user=root
 
 [local]
 localhost
